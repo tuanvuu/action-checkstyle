@@ -6,9 +6,9 @@ set -e
 # output some information
 { echo "Pre-installed"; java -jar /opt/lib/checkstyle.jar --version; } | sed ':a;N;s/\n/ /;ba'
 
-if [ -n "${GITHUB_WORKSPACE}" ] ; then
-  cd "${GITHUB_WORKSPACE}" || exit
-  git config --global --add safe.directory "${GITHUB_WORKSPACE}" || exit 1
+if [ -n "${GITLAB_WORKSPACE}" ] ; then
+  cd "${GITLAB_WORKSPACE}" || exit
+  git config --global --add safe.directory "${GITLAB_WORKSPACE}" || exit 1
 fi
 
 # user supplied custom properties file parameter, define it
@@ -24,7 +24,7 @@ if [ -n "${INPUT_CHECKSTYLE_VERSION}" ]; then
   wget -q -O /opt/lib/checkstyle.jar "$url"
 fi
 
-export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
+export REVIEWDOG_GITLAB_API_TOKEN="${INPUT_GITLAB_TOKEN}"
 
 # run check
 { echo "Run check with"; java -jar /opt/lib/checkstyle.jar --version; } | sed ':a;N;s/\n/ /;ba'
@@ -32,7 +32,7 @@ export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 exec java -jar /opt/lib/checkstyle.jar "${INPUT_WORKDIR}" -c "${INPUT_CHECKSTYLE_CONFIG}" ${OPTIONAL_PROPERTIES_FILE} -f xml \
   | reviewdog -f=checkstyle \
       -name="checkstyle" \
-      -reporter="${INPUT_REPORTER:-github-pr-check}" \
+      -reporter="${INPUT_REPORTER:-gitlab-mr-discussion}" \
       -filter-mode="${INPUT_FILTER_MODE:-added}" \
       -fail-on-error="${INPUT_FAIL_ON_ERROR:-false}" \
       -level="${INPUT_LEVEL}" \
