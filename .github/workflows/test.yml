@@ -1,0 +1,129 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+# only allow minimum required permissions at top-level
+permissions:
+  contents: read
+
+jobs:
+
+  test-check:
+    name: runner / checkstyle (github-check)
+    runs-on: ubuntu-latest
+
+    permissions:
+      checks: write
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-check
+          level: info
+
+  test-pr-check:
+    if: github.event_name == 'pull_request'
+    name: runner / checkstyle (github-pr-check)
+    runs-on: ubuntu-latest
+
+    permissions:
+      checks: write
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-check
+          level: warning
+          workdir: ./testdata/java/
+
+  test-pr-review:
+    if: github.event_name == 'pull_request'
+    name: runner / checkstyle (github-pr-review)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: error
+          reviewdog_flags: -filter-mode=file -fail-on-error
+
+  test-properties-file:
+    if: github.event_name == 'pull_request'
+    name: runner / checkstyle (properties_file)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          workdir: ./testdata/java/
+          checkstyle_config: ./testdata/properties_file/test_checks.xml
+          properties_file: ./testdata/properties_file/additional.properties
+
+  test-custom-checkstyle-version-9:
+    if: github.event_name == 'pull_request'
+    name: runner / checkstyle (v9.0)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          workdir: ./testdata/java/
+          checkstyle_version: "9.0"
+
+  test-custom-checkstyle-version-10:
+    if: github.event_name == 'pull_request'
+    name: runner / checkstyle (v10.0)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          workdir: ./testdata/java/
+          checkstyle_version: "10.0"
