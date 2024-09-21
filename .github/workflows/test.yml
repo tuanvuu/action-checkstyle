@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-check
           level: info
 
@@ -49,7 +49,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-pr-check
           level: warning
           workdir: ./testdata/java/
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-pr-review
           level: error
           reviewdog_flags: -filter-mode=file -fail-on-error
@@ -87,7 +87,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           workdir: ./testdata/java/
           checkstyle_config: ./testdata/properties_file/test_checks.xml
           properties_file: ./testdata/properties_file/additional.properties
@@ -106,7 +106,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           workdir: ./testdata/java/
           checkstyle_version: "9.0"
 
@@ -124,6 +124,6 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: ./
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           workdir: ./testdata/java/
           checkstyle_version: "10.0"

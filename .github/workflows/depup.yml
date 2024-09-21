@@ -37,7 +37,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SECRET_TOKEN }}
           title: "chore(deps): update reviewdog to ${{ steps.depup.outputs.latest }}"
           commit-message: "chore(deps): update reviewdog to ${{ steps.depup.outputs.latest }}"
           body: |
@@ -73,7 +73,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SECRET_TOKEN }}
           title: "chore(deps): update default checkstyle to ${{ steps.depup-checkstyle.outputs.latest }}"
           commit-message: "chore(deps): update default checkstyle to ${{ steps.depup-checkstyle.outputs.latest }}"
           body: |

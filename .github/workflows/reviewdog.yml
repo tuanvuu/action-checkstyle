@@ -37,7 +37,7 @@ jobs:
           if_false: "github-check"
       - uses: reviewdog/action-shellcheck@ccaafec556ffa154f112bfcb7b9c9574190b7091 # v1.27.0
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: ${{ steps.reporter.outputs.value }}
           level: warning
 
@@ -64,7 +64,7 @@ jobs:
           if_false: "github-check"
       - uses: reviewdog/action-hadolint@73fec8b28091e5082c19df69815dd749d97b882a # v1.46.0
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: ${{ steps.reporter.outputs.value }}
           level: warning
 
@@ -86,7 +86,7 @@ jobs:
       - name: markdown-lint
         uses: reviewdog/action-markdownlint@28fb4224271253fedd5079b61de820d6228041fd # v0.25.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-pr-review
           markdownlint_flags: '**/*.md --ignore LICENSE.md --disable MD013 --' # disable line length rule and ignore LICENSE file
 
@@ -107,7 +107,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: reviewdog/action-misspell@ef8b22c1cca06c8d306fc6be302c3dab0f6ca12f # v1.23.0
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-check
           level: warning
           locale: "US"
@@ -129,6 +129,6 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: reviewdog/action-alex@73756e09c07d6025e86f0ac5605b65f2d4b4b78b # v1.14.0
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-check
           level: warning

@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dbelyaev/action-checkstyle@master
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.SECRET_TOKEN }}
           reporter: github-pr-review
           level: warning
 ```
@@ -66,7 +66,7 @@ config for the [Sun coding conventions](https://www.oracle.com/java/technologies
         - uses: actions/checkout@v4
         - uses: dbelyaev/action-checkstyle@master
           with:
-            github_token: ${{ secrets.github_token }}
+            github_token: ${{ secrets.SECRET_TOKEN }}
             reporter: github-pr-review
             checkstyle_config: sun_checks.xml
   ```
@@ -99,7 +99,7 @@ config for the [Sun coding conventions](https://www.oracle.com/java/technologies
         - uses: actions/checkout@v4
         - uses: dbelyaev/action-checkstyle@master
           with:
-            github_token: ${{ secrets.github_token }}
+            github_token: ${{ secrets.SECRET_TOKEN }}
             reporter: github-pr-review
             checkstyle_version: "9.0" # double quotes important here
   ```
@@ -131,7 +131,7 @@ config for the [Sun coding conventions](https://www.oracle.com/java/technologies
         - uses: actions/checkout@v4
         - uses: dbelyaev/action-checkstyle@master
           with:
-            github_token: ${{ secrets.github_token }}
+            github_token: ${{ secrets.SECRET_TOKEN }}
             reporter: github-pr-review
             checkstyle_config: ./properties_file/test_checks.xml
             properties_file: ./properties_file/additional.properties
