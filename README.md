@@ -12,11 +12,6 @@
 
 This is a GitHub action to run [Checkstyle](https://github.com/checkstyle/checkstyle) checks on your Java code and report the status via [reviewdog](https://github.com/reviewdog/reviewdog) on pull requests.
 
-## Example
-
-An example of how the reported Checkstyle violations will look on a pull request is shown below ([link to example PR](https://github.com/dbelyaev/action-checkstyle-tester/pull/9)):
-
-![PR comment with violation](https://user-images.githubusercontent.com/6915328/149333188-4600a75d-5670-4013-9395-d5852e3c7839.png)
 
 ## Usage
 
